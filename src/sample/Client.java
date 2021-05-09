@@ -20,12 +20,12 @@ public class Client {
         double tempHour = 0.0;
         double tempMinute = 0.0;
         LocalTime tempTime;
-        System.out.println("\n\nClient: "+name);
+        System.out.println("\n\nKlant: "+name);
         for (Employee emp : Employee.employees) {
             for (WorkHour hour : emp.getWorkHours()) {
                 if (hour.getClient().equals(this)) {
-                    System.out.print("Employee: " + emp.getName() + "\tDate: " + hour.getDate().toString());
-                    System.out.print("\tWorked time: ");
+                    System.out.print("Werknemer: " + emp.getName() + "\tDatum: " + hour.getDate().toString());
+                    System.out.print("\tWerktijd: ");
                     tempTime=LocalTime.parse(calcHours(hour));
                     tempHour+=tempTime.getHour();
                     tempMinute+=tempTime.getMinute();
