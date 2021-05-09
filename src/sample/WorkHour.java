@@ -9,4 +9,8 @@ public class WorkHour {
     private Client client;
     private Employee employee;
     private String description;
+
+    public boolean saveWorkHour(String date, String startTime, String endTime, String client, Employee emp, String description) {
+        return true;
+    }
 }
