@@ -9,5 +9,4 @@ public class WorkHour {
     private Client client;
     private Employee employee;
     private String description;
-
 }
