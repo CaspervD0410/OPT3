@@ -29,6 +29,10 @@ public class Employee {
         return name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getFuntion() {
         return funtion;
     }
