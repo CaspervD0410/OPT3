@@ -7,9 +7,10 @@ import java.time.*;
 import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class WorkHourTest {
-    Employee emp1 = new Employee("Hank","Technicus",40);
-    Employee emp2 = new Employee("John","Administratie",30);
-    Employee emp3 = new Supervisor("Marc","Leidinggevende",40);
+    Employee emp1 = new Employee("Hank","123","Technicus",40,false,false);
+    Employee emp2 = new Employee("John","password","Administratie",30,false,false);
+    Employee emp3 = new Employee("Marc","password123","Administratie",40,true,false);
+    Employee emp4 = new Employee("Dean","P@ssw0rd!","Technicus",40,false,true);
     Client cli1 = new Client("Plus");
     Client vda = new Client("VDA");
 
