@@ -19,19 +19,25 @@ class WorkHourTest {
     public void showWorkHours() {
         //Bij deze test moet er naast de uitkomst van de Assert ook gekeken worden naar de uitgeprinte regels
         WorkHour.saveWorkHour("08-05-2021", "08:30", "10:30", "Plus", emp1, "Werk");
-        assertEquals(2.0,cli1.showWorkHours(),0.01);
+        assertEquals(2.0,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("03-05-2021", "16:00", "17:00", "Plus", emp1, "Werk");
-        assertEquals(3.0,cli1.showWorkHours(),0.01);
+        assertEquals(3.0,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("05-05-2021", "17:00", "19:00", "Plus", emp1, "Werk");
-        assertEquals(5.0,cli1.showWorkHours(),0.01);
+        assertEquals(5.0,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("08-05-2021", "16:45", "17:15", "Plus", emp1, "Werk");
-        assertEquals(5.5,cli1.showWorkHours(),0.01);
+        assertEquals(5.5,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("04-05-2021", "08:00", "09:00", "Plus", emp1, "Werk");
-        assertEquals(6.5,cli1.showWorkHours(),0.01);
+        assertEquals(6.5,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("09-05-2021", "02:00", "02:15", "Plus", emp1, "Werk");
-        assertEquals(6.75,cli1.showWorkHours(),0.01);
+        assertEquals(6.75,cli1.showWorkHours(),0.1);
         WorkHour.saveWorkHour("09-05-2021", "13:00", "14:15", "Plus", emp1, "Werk");
-        assertEquals(8.0,cli1.showWorkHours(),0.01);
+        assertEquals(8.0,cli1.showWorkHours(),0.1);
+        WorkHour.saveWorkHour("03-05-2021", "08:31", "16:59", "Plus", emp1, "Werk");
+        assertEquals(16.47,cli1.showWorkHours(),0.1);
+        WorkHour.saveWorkHour("05-05-2021", "08:29", "08:31", "Plus", emp1, "Werk");
+        assertEquals(16.50,cli1.showWorkHours(),0.1);
+        WorkHour.saveWorkHour("07-05-2021", "16:59", "17:01", "Plus", emp1, "Werk");
+        assertEquals(16.53,cli1.showWorkHours(),0.1);
     }
 
     @Order(2)
