@@ -63,19 +63,11 @@ abstract class Employee {
 
     protected abstract void extraOptions();
 
-    protected void executeChoice(String choice) {
-        switch (choice) {
-            case "1" : writeHours(); break;
-            case "2" : printHours(); break;
-            case "0" : Login.getInstance().logOut(); break;
-            case "e" : System.exit(9999);
-            default : System.out.println("Foutieve waarde ingevoerd. Probeer opnieuw.");
-        }
-    }
+    protected abstract void executeChoice(String choice);
 
     protected void printHours() {
-        new WorkHour(LocalDate.parse("2021-06-05"), LocalTime.parse("08:00"),LocalTime.parse("09:00"),Client.clients.get(0),"Onderhoud server");
-        new WorkHour(LocalDate.parse("2021-06-06"), LocalTime.parse("09:00"),LocalTime.parse("11:15"),Client.clients.get(0),"Probleem email");
+        new WorkHour(LocalDate.parse("2021-06-05"), LocalTime.parse("08:00"),LocalTime.parse("09:00"),Client.clients.get(1),"Onderhoud server");
+        new WorkHour(LocalDate.parse("2021-06-06"), LocalTime.parse("09:00"),LocalTime.parse("11:15"),Client.clients.get(1),"Probleem email");
 
         for (WorkHour wh : workHours) {
             wh.printHourLine();
