@@ -1,16 +1,13 @@
 package sample;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 abstract class Employee {
-    public static ArrayList<Employee> employees = new ArrayList<>();
-    protected ArrayList<WorkHour> workHours = new ArrayList<>();
-    protected String name;
-    protected String password;
-    protected Integer contractHours;
+    public static final ArrayList<Employee> employees = new ArrayList<>();
+    protected final ArrayList<WorkHour> workHours = new ArrayList<>();
+    protected final String name;
+    protected final String password;
+    protected final Integer contractHours;
 
     public Employee(String name, String password, Integer contractHours) {
         this.name=name;
@@ -66,11 +63,8 @@ abstract class Employee {
     protected abstract void executeChoice(String choice);
 
     protected void printHours() {
-        new WorkHour(LocalDate.parse("2021-06-05"), LocalTime.parse("08:00"),LocalTime.parse("09:00"),Client.clients.get(1),"Onderhoud server");
-        new WorkHour(LocalDate.parse("2021-06-06"), LocalTime.parse("09:00"),LocalTime.parse("11:15"),Client.clients.get(1),"Probleem email");
-
-        for (WorkHour wh : workHours) {
+       for (WorkHour wh : workHours) {
             wh.printHourLine();
-        }
+       }
     }
 }

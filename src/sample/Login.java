@@ -6,9 +6,6 @@ public class Login {
     private Employee loggedInUser;
 
     private Login() {
-        new Supervisor("Casper","HelloWorld",20);
-        new Client("VDA");
-        new Client("PTR");
         loggedInUser=null;
     }
 

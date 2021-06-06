@@ -8,7 +8,7 @@ public class WorkHour {
     private final LocalTime startTime;
     private final LocalTime endTime;
     private final Client client;
-    private String description;
+    private final String description;
 
     private static boolean saveWorkHour(String date, String startTime, String endTime, String client, String description) {
         if (LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy")).isAfter(LocalDate.now())) {
@@ -58,7 +58,8 @@ public class WorkHour {
         System.out.printf(" | Beschrijving: %s%n%n",description);
     }
 
-    public String calcHours() {
+    //Methode gaat weer iets returnen als de tests opgelost zijn (moest nog niet voor domein- en eindontwerp)
+    public void calcHours() {
         int tempHour=0;
         int tempMinute=0;
         int earlyTimeDifference;
@@ -70,7 +71,7 @@ public class WorkHour {
             timeRest=endTime.toSecondOfDay() - startTime.toSecondOfDay();
             workTime+=String.format("%02d",(timeRest/3600))+":"+String.format("%02d",((timeRest % 3600) / 60));
             System.out.print(workTime + " (200%)");
-            return workTime;
+            //return workTime;
         }
         else {
             earlyTimeDifference = startTime.toSecondOfDay() - LocalTime.parse("08:30").toSecondOfDay();
@@ -89,20 +90,9 @@ public class WorkHour {
 
             workTime += String.format("%02d",(timeRest / 3600)) + ":" + String.format("%02d",((timeRest % 3600) / 60)) + " (100%), " + String.format("%02d",tempHour) + ":" + String.format("%02d",tempMinute)+" (150%)";
             System.out.print(workTime);
-            return "" + String.format("%02d",(tempHour + (timeRest / 3600))) + ":" + String.format("%02d",(tempMinute+((timeRest % 3600) / 60))%60);
+            //return "" + String.format("%02d",(tempHour + (timeRest / 3600))) + ":" + String.format("%02d",(tempMinute+((timeRest % 3600) / 60))%60);
         }
     }
 
-    public Client getClient() {
-        return client;
-    }
-    public LocalDate getDate() {
-        return date;
-    }
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-    public LocalTime getEndTime() {
-        return endTime;
-    }
+    public Client getClient() { return client; }
 }
