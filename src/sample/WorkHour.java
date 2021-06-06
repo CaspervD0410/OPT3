@@ -4,15 +4,13 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class WorkHour {
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private Client client;
-    private Employee employee;
+    private final LocalDate date;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
+    private final Client client;
     private String description;
 
-
-    public static boolean saveWorkHour(String date, String startTime, String endTime, String client, Employee emp, String description) {
+    private static boolean saveWorkHour(String date, String startTime, String endTime, String client, String description) {
         if (LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy")).isAfter(LocalDate.now())) {
             System.out.println("Datum klopt niet.");
             return false;
@@ -23,7 +21,7 @@ public class WorkHour {
         }
         for (Client cl : Client.clients) {
             if (cl.getName().equals(client)) {
-                new WorkHour(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd-MM-yyyy")),LocalTime.parse(startTime),LocalTime.parse(endTime),cl,emp,description);
+                new WorkHour(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd-MM-yyyy")),LocalTime.parse(startTime),LocalTime.parse(endTime),cl,description);
                 System.out.println("Uren opgeslagen.");
                 return true;
             }
@@ -32,44 +30,78 @@ public class WorkHour {
         return false;
     }
 
-    public static boolean checkWorkHour(String date, String startTime, String endTime, String client, Employee emp, String description){
-        if (description.equalsIgnoreCase("vrij")&&!client.equalsIgnoreCase("VDA")){
-            System.out.println("Vrij is altijd ten laste van VDA.");
+    public static boolean checkWorkHour(String date, String startTime, String endTime, String client, String description){
+        if (description.toLowerCase().contains("vrij")&&!client.equalsIgnoreCase("VDA")){
+            System.out.println("Vrij is altijd ten laste van VDA. Uren niet opgeslagen.");
             return false;
         }
-        if (emp.getFuntion().equals("Administratie")&&!client.equalsIgnoreCase("VDA")) {
-            System.out.println("Administratief werk is altijd ten last van VDA.");
+        if (Login.getInstance().getLoggedInUser() instanceof Administration &&!client.equalsIgnoreCase("VDA")) {
+            System.out.println("Administratief werk is altijd ten last van VDA. Uren niet opgeslagen.");
             return false;
         }
-        return saveWorkHour(date, startTime, endTime, client, emp, description);
+        if (date==null||date.equals("")) { date=LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")); }
+        return saveWorkHour(date, startTime, endTime, client, description);
     }
 
-    public static boolean checkWorkHour(String startTime, String endTime, String client, Employee emp, String description) {
-        return checkWorkHour(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")), startTime, endTime, client, emp, description);
-        }
-
-    public WorkHour(LocalDate date, LocalTime startTime, LocalTime endTime, Client client, Employee employee, String description) {
+    public WorkHour(LocalDate date, LocalTime startTime, LocalTime endTime, Client client, String description) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.client = client;
-        this.employee = employee;
         this.description = description;
-        employee.getWorkHours().add(this);
+        Login.getInstance().getLoggedInUser().getWorkHours().add(this);
+    }
+
+    public void printHourLine() {
+        System.out.printf("Datum: %s | Werktijd: ",date.toString());
+        calcHours();
+        System.out.printf(" | Beschrijving: %s%n%n",description);
+    }
+
+    public String calcHours() {
+        int tempHour=0;
+        int tempMinute=0;
+        int earlyTimeDifference;
+        int lateTimeDifference;
+        int timeRest=0;
+        String workTime = "";
+
+        if (date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+            timeRest=endTime.toSecondOfDay() - startTime.toSecondOfDay();
+            workTime+=String.format("%02d",(timeRest/3600))+":"+String.format("%02d",((timeRest % 3600) / 60));
+            System.out.print(workTime + " (200%)");
+            return workTime;
+        }
+        else {
+            earlyTimeDifference = startTime.toSecondOfDay() - LocalTime.parse("08:30").toSecondOfDay();
+            if (earlyTimeDifference < 0) {
+                tempHour += -earlyTimeDifference / 3600;
+                tempMinute += (-earlyTimeDifference % 3600) / 60;
+                timeRest-=earlyTimeDifference;
+            }
+            lateTimeDifference = endTime.toSecondOfDay() - LocalTime.parse("17:00").toSecondOfDay();
+            if (lateTimeDifference > 0) {
+                tempHour += lateTimeDifference / 3600;
+                tempMinute += (lateTimeDifference % 3600) / 60;
+                timeRest-=lateTimeDifference;
+            }
+            if(!(earlyTimeDifference<0) && !(lateTimeDifference > 0)) { timeRest += endTime.toSecondOfDay() - startTime.toSecondOfDay();}
+
+            workTime += String.format("%02d",(timeRest / 3600)) + ":" + String.format("%02d",((timeRest % 3600) / 60)) + " (100%), " + String.format("%02d",tempHour) + ":" + String.format("%02d",tempMinute)+" (150%)";
+            System.out.print(workTime);
+            return "" + String.format("%02d",(tempHour + (timeRest / 3600))) + ":" + String.format("%02d",(tempMinute+((timeRest % 3600) / 60))%60);
+        }
     }
 
     public Client getClient() {
         return client;
     }
-
     public LocalDate getDate() {
         return date;
     }
-
     public LocalTime getStartTime() {
         return startTime;
     }
-
     public LocalTime getEndTime() {
         return endTime;
     }

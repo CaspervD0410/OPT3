@@ -37,8 +37,8 @@ public class Client {
     public String calcHours(WorkHour hour) {
         int tempHour=0;
         int tempMinute=0;
-        int earlyTimeDifference=0;
-        int lateTimeDifference=0;
+        int earlyTimeDifference;
+        int lateTimeDifference;
         int timeRest=0;
         String workTime = "";
 
