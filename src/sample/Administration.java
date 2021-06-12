@@ -41,7 +41,8 @@ public class Administration extends Employee{
                 System.out.println("Voer de klantnaam in: ");
                 String client = in.nextLine();
                 for (Employee emp : employees) {
-                    for (WorkHour wh : workHours) {
+                    for (WorkHour wh : emp.getWorkHours()) {
+                        System.out.println(emp.getName());
                         if (wh.getClient().getName().toLowerCase().contains(client.toLowerCase())) {
                             wh.printHourLine();
                         }
