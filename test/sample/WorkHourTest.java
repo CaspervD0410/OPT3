@@ -42,26 +42,27 @@ class WorkHourTest {
     @Order(2)
     @Test
     public void checkWorkHour() {
-        assertTrue(WorkHour.checkWorkHour("06-05-2021", "10:00", "15:00", "Plus", "Werk"));
-        assertFalse(WorkHour.checkWorkHour("06-05-2021", "10:00", "15:00", "glopr", "Werk"));
-        assertFalse(WorkHour.checkWorkHour("05-12-2028", "10:00", "15:00", "Plus", "Werk"));
-        assertFalse(WorkHour.checkWorkHour("06-05-2021", "10:00", "08:00", "Plus", "Werk"));
+        Login.getInstance().setLoggedInUser(emp1);
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("06-05-2021", "10:00", "15:00"), "Plus", "Werk"));
+        assertFalse(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("06-05-2021", "10:00", "15:00"), "glopr", "Werk"));
+        assertFalse(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("05-12-2028", "10:00", "15:00"), "Plus", "Werk"));
+        assertFalse(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("06-05-2021", "10:00", "08:00"), "Plus", "Werk"));
     }
 
     @Order(3)
     @Test
     public void checkWorkHoursTest() {
         Login.getInstance().setLoggedInUser(emp3);
-        assertTrue(WorkHour.checkWorkHour("08-05-2021", "08:30", "09:00", "Plus", "Werk"));
-        assertTrue(WorkHour.checkWorkHour("08-05-2021", "09:00", "09:30", "VDA", "Vrij"));
-        assertTrue(WorkHour.checkWorkHour(null,"09:30", "10:00", "VDA", "Werk"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("08-05-2021", "08:30", "09:00"), "Plus", "Werk"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("08-05-2021", "09:00", "09:30"), "VDA", "Vrij"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime(null,"09:30", "10:00"), "VDA", "Werk"));
         Login.getInstance().setLoggedInUser(emp1);
-        assertTrue(WorkHour.checkWorkHour("08-05-2021", "10:00", "10:30", "VDA", "Werk"));
-        assertFalse(WorkHour.checkWorkHour(null,"10:30", "11:00", "Plus", "Vrij"));
-        assertTrue(WorkHour.checkWorkHour(null,"11:00", "11:30", "VDA", "Werk"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("08-05-2021", "10:00", "10:30"), "VDA", "Werk"));
+        assertFalse(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime(null,"10:30", "11:00"), "Plus", "Vrij"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime(null,"11:00", "11:30"), "VDA", "Werk"));
         Login.getInstance().setLoggedInUser(emp2);
-        assertTrue(WorkHour.checkWorkHour("08-05-2021", "11:30", "12:00", "VDA", "Werk"));
-        assertFalse(WorkHour.checkWorkHour("08-05-2021","12:00","12:30","Plus","Werk"));
-        assertTrue(WorkHour.checkWorkHour(null,"12:30","13:00","VDA","Vrij"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("08-05-2021", "11:30", "12:00"), "VDA", "Werk"));
+        assertFalse(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime("08-05-2021","12:00","12:30"),"Plus","Werk"));
+        assertTrue(WorkHour.checkWorkHour(DateTimeHandler.checkDateTime(null,"12:30","13:00"),"VDA","Vrij"));
     }
 }

@@ -49,7 +49,7 @@ abstract class Employee {
         String client = in.nextLine();
         System.out.println("Voer een omschrijving in:");
         String description = in.nextLine();
-        WorkHour.checkWorkHour(date,startTime,endTime,client,description);
+        WorkHour.checkWorkHour(DateTimeHandler.checkDateTime(date,startTime,endTime),client,description);
     }
 
     protected void basicOptions() {
