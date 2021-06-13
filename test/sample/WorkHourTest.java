@@ -9,35 +9,34 @@ class WorkHourTest {
     Employee emp2 = new Administration("John","password",30);
     Employee emp3 = new Technician("Marc","password123",40);
     Employee emp4 = new Supervisor("Dean","P@ssw0rd!",40);
-    Client cli1 = new Client("Plus");
-    Client vda = new Client("VDA");
 
-//    @Order(1)
-//    @Test
-//    public void showWorkHours() {
-//        Login.getInstance().setLoggedInUser(emp1);
-//        //Bij deze test moet er naast de uitkomst van de Assert ook gekeken worden naar de uitgeprinte regels
-//        WorkHour.checkWorkHour("08-05-2021", "08:30", "10:30", "Plus", "Werk");
-//        assertEquals(2.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("03-05-2021", "16:00", "17:00", "Plus", "Werk");
-//        assertEquals(3.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("05-05-2021", "17:00", "19:00", "Plus", "Werk");
-//        assertEquals(5.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("08-05-2021", "16:45", "17:15", "Plus", "Werk");
-//        assertEquals(5.5,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("04-05-2021", "08:00", "09:00", "Plus", "Werk");
-//        assertEquals(6.5,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("09-05-2021", "02:00", "02:15", "Plus", "Werk");
-//        assertEquals(6.75,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("09-05-2021", "13:00", "14:15", "Plus", "Werk");
-//        assertEquals(8.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("03-05-2021", "08:31", "16:59", "Plus", "Werk");
-//        assertEquals(16.47,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("05-05-2021", "08:29", "08:31", "Plus", "Werk");
-//        assertEquals(16.50,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("07-05-2021", "16:59", "17:01", "Plus", "Werk");
-//        assertEquals(16.53,cli1.showWorkHours(),0.1);
-//    }
+    @Order(1)
+    @Test
+    public void showWorkHours() {
+        Login.getInstance().setLoggedInUser(emp1);
+        Client cli1 = new Client("Plus");
+        //Bij deze test moet er naast de uitkomst van de Assert ook gekeken worden naar de uitgeprinte regels
+        new WorkHour(DateTimeHandler.checkDateTime("08-05-2021", "07:30", "08:30"), cli1, "Werk");
+        assertEquals(1.0,emp1.getWorkHours().get(0).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("03-05-2021", "16:00", "18:00"), cli1, "Werk");
+        assertEquals(2.0,emp1.getWorkHours().get(1).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("05-05-2021", "17:00", "19:00"), cli1, "Werk");
+        assertEquals(2.0,emp1.getWorkHours().get(2).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("08-05-2021", "16:45", "17:15"), cli1, "Werk");
+        assertEquals(0.5,emp1.getWorkHours().get(3).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("04-05-2021", "08:00", "09:00"), cli1, "Werk");
+        assertEquals(1.0,emp1.getWorkHours().get(4).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("09-05-2021", "02:00", "02:15"), cli1, "Werk");
+        assertEquals(0.25,emp1.getWorkHours().get(5).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("09-05-2021", "13:00", "14:15"), cli1, "Werk");
+        assertEquals(1.25,emp1.getWorkHours().get(6).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("03-05-2021", "08:31", "16:59"), cli1, "Werk");
+        assertEquals(8.47,emp1.getWorkHours().get(7).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("05-05-2021", "08:29", "08:31"), cli1, "Werk");
+        assertEquals(0.03,emp1.getWorkHours().get(8).getDateAndTime().calcHours(),0.1);
+        new WorkHour(DateTimeHandler.checkDateTime("07-05-2021", "16:59", "17:01"), cli1, "Werk");
+        assertEquals(0.03,emp1.getWorkHours().get(9).getDateAndTime().calcHours(),0.1);
+    }
 
     @Order(2)
     @Test

@@ -40,19 +40,23 @@ public class Administration extends Employee{
             case "1" : {
                 System.out.println("Voer de klantnaam in: ");
                 String client = in.nextLine();
-                for (Employee emp : employees) {
-                    for (WorkHour wh : emp.getWorkHours()) {
-                        System.out.println(emp.getName());
-                        if (wh.getClient().getName().toLowerCase().contains(client.toLowerCase())) {
-                            wh.printHourLine();
-                        }
-                    }
-                }
+                showWorkHours(client);
                 break;
             }
             case "2" : printHours(); break;
             case "0" : break;
             default : System.out.println("Foutieve waarde ingevoerd."); break;
+        }
+    }
+
+    private void showWorkHours(String client) {
+        for (Employee emp : employees) {
+            for (WorkHour wh : emp.getWorkHours()) {
+                System.out.println(emp.getName());
+                if (wh.getClient().getName().toLowerCase().contains(client.toLowerCase())) {
+                    wh.printHourLine();
+                }
+            }
         }
     }
 }

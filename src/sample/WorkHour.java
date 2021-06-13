@@ -46,6 +46,6 @@ public class WorkHour {
         dateAndTime.calcHours();
         System.out.printf(" | Beschrijving: %s%n%n",description);
     }
-
     public Client getClient() { return client; }
+    public DateTimeHandler getDateAndTime() { return dateAndTime; }
 }

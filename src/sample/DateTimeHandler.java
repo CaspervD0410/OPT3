@@ -33,43 +33,40 @@ public class DateTimeHandler {
         return new DateTimeHandler(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd-MM-yyyy")),LocalTime.parse(startTime),LocalTime.parse(endTime));
     }
 
-    public void calcHours() {
+    public double calcHours() {
         String workTime = "";
 
         if (date.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
             int timeRest=endTime.toSecondOfDay() - startTime.toSecondOfDay();
             workTime+=String.format("%02d",(timeRest/3600))+":"+String.format("%02d",((timeRest % 3600) / 60));
-            System.out.print(workTime + " (200%)");
-            //return workTime;
+            System.out.println(workTime + " (200%)");
+            int returnHour = timeRest/3600;
+            int returnMinute = ((timeRest % 3600) / 60);
+            return returnHour + returnMinute*(5.0/300.0);
         }
         else {
-            workTime+=splitHours();
-            System.out.print(workTime);
-            //return "" + String.format("%02d",(tempHour + (timeRest / 3600))) + ":" + String.format("%02d",(tempMinute+((timeRest % 3600) / 60))%60);
+            return splitHours();
         }
     }
 
-    public String splitHours() {
-        int timeRest=0;
-        int tempHour=0;
-        int tempMinute=0;
-        int earlyTimeDifference;
-        int lateTimeDifference;
-
-        earlyTimeDifference = startTime.toSecondOfDay() - LocalTime.parse("08:30").toSecondOfDay();
-        if (earlyTimeDifference < 0) {
-            tempHour += -earlyTimeDifference / 3600;
-            tempMinute += (-earlyTimeDifference % 3600) / 60;
+    public double splitHours() {
+        int timeRest=0; int tempHour=0; int tempMinute=0;
+        int earlyTimeDifference = LocalTime.parse("08:30").toSecondOfDay() - startTime.toSecondOfDay();
+        if (earlyTimeDifference > 0) {
+            tempHour += earlyTimeDifference / 3600;
+            tempMinute += (earlyTimeDifference % 3600) / 60;
             timeRest-=earlyTimeDifference;
         }
-        lateTimeDifference = endTime.toSecondOfDay() - LocalTime.parse("17:00").toSecondOfDay();
+        int lateTimeDifference = endTime.toSecondOfDay() - LocalTime.parse("17:00").toSecondOfDay();
         if (lateTimeDifference > 0) {
             tempHour += lateTimeDifference / 3600;
             tempMinute += (lateTimeDifference % 3600) / 60;
             timeRest-=lateTimeDifference;
         }
-        if(!(earlyTimeDifference<0) && !(lateTimeDifference > 0)) { timeRest += endTime.toSecondOfDay() - startTime.toSecondOfDay();}
-
-        return String.format("%02d",(timeRest / 3600)) + ":" + String.format("%02d",((timeRest % 3600) / 60)) + " (100%), " + String.format("%02d",tempHour) + ":" + String.format("%02d",tempMinute)+" (150%)";
+        timeRest += endTime.toSecondOfDay() - startTime.toSecondOfDay();
+        System.out.println(String.format("%02d",(timeRest / 3600)) + ":" + String.format("%02d",((timeRest % 3600) / 60)) + " (100%), " + String.format("%02d",tempHour) + ":" + String.format("%02d",tempMinute)+" (150%)");
+        tempHour = (tempHour + (timeRest / 3600));
+        tempMinute = (tempMinute+((timeRest % 3600) / 60));
+        return tempHour + tempMinute*(5.0/300.0);
     }
 }
