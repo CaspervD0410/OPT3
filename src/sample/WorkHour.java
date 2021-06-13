@@ -43,7 +43,7 @@ public class WorkHour {
 
     public void printHourLine() {
         System.out.printf("Datum: %s | Werktijd: ",dateAndTime.getDate().toString());
-        dateAndTime.calcHours();
+        System.out.print("\t" +dateAndTime.calcHours()+"\t");
         System.out.printf(" | Beschrijving: %s%n%n",description);
     }
 

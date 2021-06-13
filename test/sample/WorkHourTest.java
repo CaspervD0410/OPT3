@@ -12,32 +12,32 @@ class WorkHourTest {
     Client cli1 = new Client("Plus");
     Client vda = new Client("VDA");
 
-//    @Order(1)
-//    @Test
-//    public void showWorkHours() {
-//        Login.getInstance().setLoggedInUser(emp1);
-//        //Bij deze test moet er naast de uitkomst van de Assert ook gekeken worden naar de uitgeprinte regels
-//        WorkHour.checkWorkHour("08-05-2021", "08:30", "10:30", "Plus", "Werk");
-//        assertEquals(2.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("03-05-2021", "16:00", "17:00", "Plus", "Werk");
-//        assertEquals(3.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("05-05-2021", "17:00", "19:00", "Plus", "Werk");
-//        assertEquals(5.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("08-05-2021", "16:45", "17:15", "Plus", "Werk");
-//        assertEquals(5.5,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("04-05-2021", "08:00", "09:00", "Plus", "Werk");
-//        assertEquals(6.5,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("09-05-2021", "02:00", "02:15", "Plus", "Werk");
-//        assertEquals(6.75,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("09-05-2021", "13:00", "14:15", "Plus", "Werk");
-//        assertEquals(8.0,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("03-05-2021", "08:31", "16:59", "Plus", "Werk");
-//        assertEquals(16.47,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("05-05-2021", "08:29", "08:31", "Plus", "Werk");
-//        assertEquals(16.50,cli1.showWorkHours(),0.1);
-//        WorkHour.checkWorkHour("07-05-2021", "16:59", "17:01", "Plus", "Werk");
-//        assertEquals(16.53,cli1.showWorkHours(),0.1);
-//    }
+    //@Order(1)
+    //@Test
+    //public void showWorkHours() {
+    //    Login.getInstance().setLoggedInUser(emp2);
+    //    //Bij deze test moet er naast de uitkomst van de Assert ook gekeken worden naar de uitgeprinte regels
+    //    WorkHour.checkWorkHour("08-05-2021", "08:30", "10:30", "Plus", "Werk");
+    //    assertEquals(2.0,emp2.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("03-05-2021", "16:00", "17:00", "Plus", "Werk");
+    //    assertEquals(3.0,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("05-05-2021", "17:00", "19:00", "Plus", "Werk");
+    //    assertEquals(5.0,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("08-05-2021", "16:45", "17:15", "Plus", "Werk");
+    //    assertEquals(5.5,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("04-05-2021", "08:00", "09:00", "Plus", "Werk");
+    //    assertEquals(6.5,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("09-05-2021", "02:00", "02:15", "Plus", "Werk");
+    //    assertEquals(6.75,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("09-05-2021", "13:00", "14:15", "Plus", "Werk");
+    //    assertEquals(8.0,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("03-05-2021", "08:31", "16:59", "Plus", "Werk");
+    //    assertEquals(16.47,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("05-05-2021", "08:29", "08:31", "Plus", "Werk");
+    //    assertEquals(16.50,cli1.showWorkHours(),0.1);
+    //    WorkHour.checkWorkHour("07-05-2021", "16:59", "17:01", "Plus", "Werk");
+    //    assertEquals(16.53,cli1.showWorkHours(),0.1);
+    //}
 
     @Order(2)
     @Test
