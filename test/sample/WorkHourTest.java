@@ -9,6 +9,7 @@ class WorkHourTest {
     Employee emp2 = new Administration("John","password",30);
     Employee emp3 = new Technician("Marc","password123",40);
     Employee emp4 = new Supervisor("Dean","P@ssw0rd!",40);
+    Client vda = new Client("VDA");
 
     @Order(1)
     @Test
